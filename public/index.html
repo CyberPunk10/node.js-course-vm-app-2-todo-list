@@ -19,7 +19,7 @@
 <div id="app" v-cloak>
   <v-app :dark="isDark">
     <v-toolbar color="blue darken-4" dark>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
+      <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
       <v-toolbar-title class="headline">Список дел</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -80,7 +80,8 @@
                       {{todo.title | capitalize}}
                     </v-list-tile-title>
                     <v-list-tile-sub-title>
-                      Добавлено в: {{todo.date | date}}
+                      Добавлено: {{todos.createdAt | date(true)}}
+                      (изменено {{todos.updatedAt | date(true)}})
                     </v-list-tile-sub-title>
                   </v-list-tile-content>
                   <v-btn icon ripple color="red" @click="removeTodo(todo.id)">
@@ -98,48 +99,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
-<script>
-  new Vue({
-    el: '#app',
-    data() {
-      return {
-        isDark: true,
-        show: true,
-        todoTitle: '',
-        todos: []
-      }
-    },
-    methods: {
-      addTodo() {
-        const title = this.todoTitle.trim()
-        if (!title) {
-          return
-        }
-        this.todos.push({
-          title: title,
-          id: Math.random(),
-          done: false,
-          date: new Date()
-        })
-        this.todoTitle = ''
-      },
-      removeTodo(id) {
-        this.todos = this.todos.filter(t => t.id !== id)
-      }
-    },
-    filters: {
-      capitalize(value) {
-        return value.toString().charAt(0).toUpperCase() + value.slice(1)
-      },
-      date(value) {
-        return new Intl.DateTimeFormat('ru-RU', {
-          year: 'numeric',
-          month: 'long',
-          day: '2-digit'
-        }).format(new Date(value))
-      }
-    }
-  })
-</script>
+<script src="/app.js"></script>
 </body>
 </html>
