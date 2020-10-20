@@ -1,6 +1,8 @@
 new Vue({
   el: '#app',
-  vuetify: new Vuetify(),
+  vuetify: new Vuetify({
+    theme: { dark: true }
+  }),
   data() {
     return {
       isDark: true,
@@ -46,7 +48,7 @@ new Vue({
     capitalize(value) {
       return value.toString().charAt(0).toUpperCase() + value.slice(1)
     },
-    date(value,withTime) {
+    date(value, withTime) {
       const options = {
         year: 'numeric',
         month: 'long',
@@ -58,6 +60,7 @@ new Vue({
         options.minute = '2-digit'
         options.second = '2-digit'
       }
+
       return new Intl.DateTimeFormat('ru-RU', options).format(new Date(value))
     }
   }

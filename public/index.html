@@ -17,9 +17,9 @@
 </head>
 <body>
 <div id="app" v-cloak>
-  <v-app :dark="isDark">
-    <v-toolbar color="blue darken-4" dark>
-      <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+  <v-app>
+    <v-app-bar color="blue darken-4" dark>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title class="headline">Список дел</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -33,12 +33,14 @@
         </template>
         <span>{{isDark ? 'Светлая тема' : 'Темная тема'}}</span>
       </v-tooltip>
-    </v-toolbar>
+    </v-app-bar>
+
     <v-container>
       <v-layout row justify-center>
         <v-flex xs12>
           <v-card>
             <v-list two-line subheader>
+
               <v-container>
                 <v-subheader class="headline">
                   {{new Date() | date}}
@@ -60,35 +62,42 @@
                   </v-text-field>
                 </v-flex>
               </v-container>
+
               <v-subheader class="subheading" v-if="todos.length === 0">
                 У вас 0 задач, добавьте новую
               </v-subheader>
               <v-subheader class="subheading" v-else>
                 Ваши задачи
               </v-subheader>
+
               <div v-for="(todo, i) in todos" :key="i">
-                <v-list-tile avatar>
-                  <v-list-tile-action>
+                <v-list-item>
+
+                  <v-list-item-action>
                     <v-checkbox
                       v-if="!todo.done"
                       v-model="todo.done"
                       :dark="isDark"
                     ></v-checkbox>
-                  </v-list-tile-action>
-                  <v-list-tile-content>
-                    <v-list-tile-title :class="{done: todo.done}">
+                  </v-list-item-action>
+
+                  <v-list-item-content>
+                    <v-list-item-title :class="{done: todo.done}">
                       {{todo.title | capitalize}}
-                    </v-list-tile-title>
-                    <v-list-tile-sub-title>
-                      Добавлено: {{todos.createdAt | date(true)}}
-                      (изменено {{todos.updatedAt | date(true)}})
-                    </v-list-tile-sub-title>
-                  </v-list-tile-content>
+                    </v-list-item-title>
+                    <v-list-item-subtitle>
+                      Добавлено: {{todo.createdAt | date(true)}}
+                      (изменено {{todo.updatedAt | date(true)}})
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+
                   <v-btn icon ripple color="red" @click="removeTodo(todo.id)">
                     <v-icon class="white--text">close</v-icon>
                   </v-btn>
-                </v-list-tile>
+
+                </v-list-item>
               </div>
+
             </v-list>
           </v-card>
         </v-flex>

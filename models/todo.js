@@ -1,5 +1,4 @@
-const { Sequelize, STRING } = require('sequelize')
-const Sequlize = require('sequelize')
+const Sequelize = require('sequelize')
 const sequelize = require('../utils/database')
 
 const todo = sequelize.define('Todo', {
