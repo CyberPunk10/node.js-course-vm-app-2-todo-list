@@ -11,7 +11,7 @@ app.use('/api/todo', todoRoutes)
 
 app.use((req, res, next) => {
   console.log(`Server is running on port ${PORT}`)
-  res.sendFile('/index.html')
+  res.sendFile(path.join(__dirname, 'public/index.html'))
 })
 
 async function start() {
